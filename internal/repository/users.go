@@ -16,5 +16,15 @@ func NewUserRepo(db *sql.DB) *UsersRepository {
 	}
 }
 
-func (r *UsersRepository) Create(user model.User) {
+func (r *UsersRepository) Create(user model.User) error {
+	stmt, err := r.db.Prepare("INSERT INTO Users (login, email,password) VALUES(?,?,?)")
+	if err != nil {
+		return err
+	}
+	_, err = stmt.Exec(user.Login, user.Email, user.Password)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+	return nil
 }

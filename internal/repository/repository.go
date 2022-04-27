@@ -7,7 +7,7 @@ import (
 )
 
 type Users interface {
-	Create(model.User)
+	Create(model.User) error
 }
 
 type Posts interface{}
