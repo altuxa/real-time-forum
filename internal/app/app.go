@@ -11,7 +11,7 @@ import (
 )
 
 func Run() {
-	db, err := sql.Open("sqlite3", "./database.db")
+	db, err := sql.Open("sqlite3", "./database.db?_foreign_keys=on")
 	if err != nil {
 		log.Fatalln(err)
 	}

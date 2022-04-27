@@ -1,8 +1,13 @@
 package service
 
-import "github.com/altuxa/real-time-forum/internal/repository"
+import (
+	"github.com/altuxa/real-time-forum/internal/model"
+	"github.com/altuxa/real-time-forum/internal/repository"
+)
 
-type Users interface{}
+type Users interface {
+	SignUp(model.User) error
+}
 
 type Posts interface{}
 
