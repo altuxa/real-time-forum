@@ -7,6 +7,7 @@ import (
 	"github.com/altuxa/real-time-forum/internal/handler/http"
 	"github.com/altuxa/real-time-forum/internal/repository"
 	"github.com/altuxa/real-time-forum/internal/service"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Run() {

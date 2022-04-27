@@ -28,6 +28,7 @@ func NewHandler(services *service.Services) *Handler {
 func (h *Handler) NewServer() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", h.HomePage)
+	log.Println("Server started")
 	if err := http.ListenAndServe(":8000", mux); err != nil {
 		log.Fatalln(err)
 	}
