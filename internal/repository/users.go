@@ -28,3 +28,27 @@ func (r *UsersRepository) Create(user model.User) error {
 	defer stmt.Close()
 	return nil
 }
+
+func (r *UsersRepository) GetUserByID(user model.User) (model.User, error) {
+	oneUser := model.User{}
+	stmt, err := r.db.Prepare("SELECT ID, login, email, password FROM Users WHERE ID = ?")
+	if err != nil {
+		return model.User{}, err
+	}
+	row := stmt.QueryRow(user.Id)
+	err = row.Scan(&oneUser.Id, &oneUser.Login, &oneUser.Email, &oneUser.Password)
+	if err != nil {
+		return model.User{}, err
+	}
+	return oneUser, nil
+}
+
+func (r *UsersRepository) GetByCredentials(userName, password string) (model.User, error) {
+	var user model.User
+	row := r.db.QueryRow("SELECT ID FROM Users WHERE login = ? AND password = ?", userName, password)
+	err := row.Scan(&user.Id)
+	if err != nil {
+		return model.User{}, err
+	}
+	return user, nil
+}

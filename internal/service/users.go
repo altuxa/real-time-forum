@@ -22,3 +22,11 @@ func (s *UsersService) SignUp(user model.User) error {
 	}
 	return nil
 }
+
+func (s *UsersService) SignIn(user model.User) error {
+	user, err := s.repo.GetByCredentials(user.Login, user.Password)
+	if err != nil {
+		return err
+	}
+	return nil
+}
