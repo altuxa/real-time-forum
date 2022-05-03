@@ -10,6 +10,7 @@ type Users interface {
 	Create(model.User) error
 	GetUserByID(model.User) (model.User, error)
 	GetByCredentials(userName, password string) (model.User, error)
+	GetPostsByUserID(userId int) ([]model.Posts, error)
 }
 
 type Posts interface{}

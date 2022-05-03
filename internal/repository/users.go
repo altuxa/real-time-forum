@@ -52,3 +52,7 @@ func (r *UsersRepository) GetByCredentials(userName, password string) (model.Use
 	}
 	return user, nil
 }
+
+func (r *UsersRepository) GetPostsByUserID(userId int) ([]model.Posts, error) {
+	return nil, nil
+}
