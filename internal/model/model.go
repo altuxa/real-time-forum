@@ -1,10 +1,14 @@
 package model
 
 type User struct {
-	Id       int
-	Login    string
-	Email    string
-	Password string
+	Id        int
+	NickName  string
+	Age       int
+	Gender    string
+	FirstName string
+	LastName  string
+	Email     string
+	Password  string
 }
 
 type Post struct {

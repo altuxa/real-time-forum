@@ -24,7 +24,7 @@ func (s *UsersService) SignUp(user model.User) error {
 }
 
 func (s *UsersService) SignIn(user model.User) error {
-	user, err := s.repo.GetByCredentials(user.Login, user.Password)
+	user, err := s.repo.GetByCredentials(user.NickName, user.Password)
 	if err != nil {
 		return err
 	}

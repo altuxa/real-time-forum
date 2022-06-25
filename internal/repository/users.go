@@ -21,7 +21,7 @@ func (r *UsersRepository) Create(user model.User) error {
 	if err != nil {
 		return err
 	}
-	_, err = stmt.Exec(user.Login, user.Email, user.Password)
+	_, err = stmt.Exec(user.NickName, user.Email, user.Password)
 	if err != nil {
 		return err
 	}
@@ -36,7 +36,7 @@ func (r *UsersRepository) GetUserByID(userID int) (model.User, error) {
 		return model.User{}, err
 	}
 	row := stmt.QueryRow(userID)
-	err = row.Scan(&oneUser.Id, &oneUser.Login, &oneUser.Email, &oneUser.Password)
+	err = row.Scan(&oneUser.Id, &oneUser.NickName, &oneUser.Email, &oneUser.Password)
 	if err != nil {
 		return model.User{}, err
 	}
