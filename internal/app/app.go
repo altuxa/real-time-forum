@@ -15,6 +15,7 @@ func Run() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer db.Close()
 	repo := repository.NewRepositories(db)
 	service := service.NewService(repo)
 	handler := http.NewHandler(service)

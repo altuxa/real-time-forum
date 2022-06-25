@@ -10,9 +10,13 @@ type Users interface {
 	SignIn(model.User) error
 }
 
-type Posts interface{}
+type Posts interface {
+	CreatePost(model.Post) error
+}
 
-type Comments interface{}
+type Comments interface {
+	CreateComment(model.Comment) error
+}
 
 type Categories interface{}
 

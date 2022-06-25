@@ -7,13 +7,14 @@ type User struct {
 	Password string
 }
 
-type Posts struct {
+type Post struct {
 	Id       int
+	AuthodID int
 	Title    string
 	BodyText string
 }
 
-type Comments struct {
+type Comment struct {
 	Id       int
 	BodyText string
 }

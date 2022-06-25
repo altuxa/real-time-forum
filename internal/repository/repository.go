@@ -8,14 +8,18 @@ import (
 
 type Users interface {
 	Create(model.User) error
-	GetUserByID(model.User) (model.User, error)
+	GetUserByID(userID int) (model.User, error)
 	GetByCredentials(userName, password string) (model.User, error)
-	GetPostsByUserID(userId int) ([]model.Posts, error)
+	GetPostsByUserID(userId int) ([]model.Post, error)
 }
 
-type Posts interface{}
+type Posts interface {
+	CreatePost(model.Post) error
+}
 
-type Comments interface{}
+type Comments interface {
+	CreateComment(model.Comment) error
+}
 
 type Categories interface{}
 

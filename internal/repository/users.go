@@ -29,13 +29,13 @@ func (r *UsersRepository) Create(user model.User) error {
 	return nil
 }
 
-func (r *UsersRepository) GetUserByID(user model.User) (model.User, error) {
+func (r *UsersRepository) GetUserByID(userID int) (model.User, error) {
 	oneUser := model.User{}
 	stmt, err := r.db.Prepare("SELECT ID, login, email, password FROM Users WHERE ID = ?")
 	if err != nil {
 		return model.User{}, err
 	}
-	row := stmt.QueryRow(user.Id)
+	row := stmt.QueryRow(userID)
 	err = row.Scan(&oneUser.Id, &oneUser.Login, &oneUser.Email, &oneUser.Password)
 	if err != nil {
 		return model.User{}, err
@@ -53,6 +53,6 @@ func (r *UsersRepository) GetByCredentials(userName, password string) (model.Use
 	return user, nil
 }
 
-func (r *UsersRepository) GetPostsByUserID(userId int) ([]model.Posts, error) {
+func (r *UsersRepository) GetPostsByUserID(userId int) ([]model.Post, error) {
 	return nil, nil
 }
