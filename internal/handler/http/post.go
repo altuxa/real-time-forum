@@ -12,6 +12,7 @@ import (
 type createPostInput struct {
 	Title    string
 	BodyText string
+	Tags     []model.Tag
 }
 
 func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +30,7 @@ func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
 	err = h.postsService.CreatePost(model.Post{
 		Title:    inputPost.Title,
 		BodyText: inputPost.BodyText,
+		Tags:     inputPost.Tags,
 	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

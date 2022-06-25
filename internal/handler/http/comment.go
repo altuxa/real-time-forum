@@ -10,6 +10,7 @@ import (
 )
 
 type createCommentInput struct {
+	PostId   int
 	BodyText string
 }
 
@@ -25,7 +26,10 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid input", http.StatusBadRequest)
 		return
 	}
-	err = h.commentsService.CreateComment(model.Comment{BodyText: input.BodyText})
+	err = h.commentsService.CreateComment(model.Comment{
+		BodyText: input.BodyText,
+		PostId:   input.PostId,
+	})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
