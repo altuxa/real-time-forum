@@ -16,7 +16,7 @@ type Post struct {
 	AuthodID int
 	Title    string
 	BodyText string
-	Tags     []Tag
+	Tags     []string
 	Comments []Comment
 }
 

@@ -12,7 +12,7 @@ import (
 type createPostInput struct {
 	Title    string
 	BodyText string
-	Tags     []model.Tag
+	Tags     []string
 }
 
 func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
