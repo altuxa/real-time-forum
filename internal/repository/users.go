@@ -17,11 +17,11 @@ func NewUserRepo(db *sql.DB) *UsersRepository {
 }
 
 func (r *UsersRepository) Create(user model.User) error {
-	stmt, err := r.db.Prepare("INSERT INTO Users (login, email,password) VALUES(?,?,?)")
+	stmt, err := r.db.Prepare("INSERT INTO Users (NickName,Age,Gender,FirstName,LastName,Email,Password) VALUES(?,?,?,?,?,?,?)")
 	if err != nil {
 		return err
 	}
-	_, err = stmt.Exec(user.NickName, user.Email, user.Password)
+	_, err = stmt.Exec(user.NickName, user.Age, user.Gender, user.FirstName, user.LastName, user.Email, user.Password)
 	if err != nil {
 		return err
 	}
@@ -31,12 +31,12 @@ func (r *UsersRepository) Create(user model.User) error {
 
 func (r *UsersRepository) GetUserByID(userID int) (model.User, error) {
 	oneUser := model.User{}
-	stmt, err := r.db.Prepare("SELECT ID, login, email, password FROM Users WHERE ID = ?")
+	stmt, err := r.db.Prepare("SELECT * FROM Users WHERE ID = ?")
 	if err != nil {
 		return model.User{}, err
 	}
 	row := stmt.QueryRow(userID)
-	err = row.Scan(&oneUser.Id, &oneUser.NickName, &oneUser.Email, &oneUser.Password)
+	err = row.Scan(&oneUser.Id, &oneUser.NickName, &oneUser.Age, &oneUser.Gender, &oneUser.FirstName, &oneUser.LastName, &oneUser.Email, &oneUser.Password)
 	if err != nil {
 		return model.User{}, err
 	}
@@ -45,7 +45,7 @@ func (r *UsersRepository) GetUserByID(userID int) (model.User, error) {
 
 func (r *UsersRepository) GetByCredentials(userName, password string) (model.User, error) {
 	var user model.User
-	row := r.db.QueryRow("SELECT ID FROM Users WHERE login = ? AND password = ?", userName, password)
+	row := r.db.QueryRow("SELECT ID FROM Users WHERE Login = ? AND Password = ?", userName, password)
 	err := row.Scan(&user.Id)
 	if err != nil {
 		return model.User{}, err

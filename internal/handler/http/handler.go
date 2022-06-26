@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/altuxa/real-time-forum/internal/handler/router"
 	"github.com/altuxa/real-time-forum/internal/service"
 )
 
@@ -26,11 +27,13 @@ func NewHandler(services *service.Services) *Handler {
 }
 
 func (h *Handler) NewServer() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", h.HomePage)
-	mux.HandleFunc("/newuser", h.NewUser)
+	r := new(router.Router)
+	r.Route("GET", "/", h.HomePage)
+	r.Route("POST", "/newuser", h.NewUser)
+	r.Route("POST", "/newpost", h.CreatePost)
+	r.Route("POST", "/newcomment", h.CreateComment)
 	log.Println("Server started")
-	if err := http.ListenAndServe(":8000", mux); err != nil {
+	if err := http.ListenAndServe(":8080", r); err != nil {
 		log.Fatalln(err)
 	}
 }

@@ -16,6 +16,10 @@ type createPostInput struct {
 }
 
 func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
 	reqBody, err := io.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("body read error %s", err), http.StatusInternalServerError)
