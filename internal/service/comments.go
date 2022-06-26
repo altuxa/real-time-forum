@@ -15,6 +15,10 @@ func NewCommentsService(repo repository.Comments) *CommentsService {
 	}
 }
 
-func (c *CommentsService) CreateComment(model.Comment) error {
+func (c *CommentsService) CreateComment(com model.Comment) error {
+	err := c.repo.CreateComment(com)
+	if err != nil {
+		return err
+	}
 	return nil
 }

@@ -31,7 +31,9 @@ func (h *Handler) CreatePost(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "invalid input", http.StatusBadRequest)
 		return
 	}
+	id := 1 // BETA
 	err = h.postsService.CreatePost(model.Post{
+		AuthodID: id,
 		Title:    inputPost.Title,
 		BodyText: inputPost.BodyText,
 		Tags:     inputPost.Tags,
