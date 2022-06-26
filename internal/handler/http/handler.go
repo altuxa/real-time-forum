@@ -29,9 +29,9 @@ func NewHandler(services *service.Services) *Handler {
 func (h *Handler) NewServer() {
 	r := new(router.Router)
 	r.Route("GET", "/", h.HomePage)
-	r.Route("POST", "/newuser", h.NewUser)
-	r.Route("POST", "/newpost", h.CreatePost)
-	r.Route("POST", "/newcomment", h.CreateComment)
+	r.Route("POST", "/users/sign-up", h.SignUp)
+	r.Route("POST", "/posts", h.CreatePost)
+	r.Route("POST", "/posts/comments", h.CreateComment)
 	log.Println("Server started")
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		log.Fatalln(err)
