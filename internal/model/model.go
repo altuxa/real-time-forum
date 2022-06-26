@@ -1,14 +1,14 @@
 package model
 
 type User struct {
-	Id        int
-	NickName  string
-	Age       int
-	Gender    string
-	FirstName string
-	LastName  string
-	Email     string
-	Password  string
+	Id        int    `json:"Id"`
+	NickName  string `json:"NickName"`
+	Age       int    `json:"Age"`
+	Gender    string `json:"Gender"`
+	FirstName string `json:"FirstName"`
+	LastName  string `json:"LastName"`
+	Email     string `json:"Email"`
+	Password  string `json:"Password"`
 }
 
 type Post struct {

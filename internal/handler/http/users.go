@@ -26,7 +26,8 @@ func (h *Handler) NewUser(w http.ResponseWriter, r *http.Request) {
 	}
 	err = h.usersService.SignUp(user)
 	if err != nil {
-		http.Error(w, "db error", http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
