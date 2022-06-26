@@ -15,6 +15,10 @@ func NewPostsService(repo repository.Posts) *PostsService {
 	}
 }
 
-func (p *PostsService) CreatePost(model.Post) error {
+func (p *PostsService) CreatePost(post model.Post) error {
+	err := p.repo.CreatePost(post)
+	if err != nil {
+		return err
+	}
 	return nil
 }
