@@ -45,7 +45,7 @@ func (r *UsersRepository) GetUserByID(userID int) (model.User, error) {
 
 func (r *UsersRepository) GetByCredentials(userName, password string) (model.User, error) {
 	var user model.User
-	row := r.db.QueryRow("SELECT ID FROM Users WHERE Login = ? AND Password = ?", userName, password)
+	row := r.db.QueryRow("SELECT ID FROM Users WHERE NickName = ? AND Password = ?", userName, password)
 	err := row.Scan(&user.Id)
 	if err != nil {
 		return model.User{}, err

@@ -36,7 +36,6 @@ func (h *Handler) SignUp(w http.ResponseWriter, r *http.Request) {
 
 type SingInInput struct {
 	NickName string
-	Email    string
 	Password string
 }
 
