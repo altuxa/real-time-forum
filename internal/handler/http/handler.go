@@ -33,6 +33,7 @@ func (h *Handler) NewServer() {
 	r.Route("POST", "/users/sign-in", h.SignIn)
 	r.Route("POST", "/posts", h.CreatePost)
 	r.Route("POST", "/posts/comments", h.CreateComment)
+	r.Route("GET", "/test", Auth(h.Test))
 	// r.Route("GET", "/test", func(rw http.ResponseWriter, r *http.Request) {
 	// 	a := rw.Header().Get("Aboba")
 	// 	b := r.Header.Get("Aboba")
@@ -41,8 +42,8 @@ func (h *Handler) NewServer() {
 	// 	rw.Write([]byte("jojo" + a + b))
 	// })
 	log.Println("Server started")
-	handler := Auth(r)
-	if err := http.ListenAndServe(":8080", handler); err != nil {
+
+	if err := http.ListenAndServe(":8080", r); err != nil {
 		log.Fatalln(err)
 	}
 }

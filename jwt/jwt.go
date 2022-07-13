@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 )
 
@@ -72,16 +73,33 @@ func (j *JWT) SignedToken(secret string) (string, error) {
 	return signed, nil
 }
 
-func (j *JWT) Verify(token, secret string) error {
-	signedToken, err := j.SignedToken(secret)
-	if err != nil {
-		return err
-	}
-	tokenFromClient := strings.Split(token, ".")
-	tokenFromServer := strings.Split(signedToken, ".")
-	signFromClient := tokenFromClient[2]
-	signFromServer := tokenFromServer[2]
-	if signFromClient != signFromServer {
+// func (j *JWT) Verify(token, secret string) error {
+// 	signedToken, err := j.SignedToken(secret)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	tokenFromClient := strings.Split(token, ".")
+// 	tokenFromServer := strings.Split(signedToken, ".")
+// 	signFromClient := tokenFromClient[2]
+// 	signFromServer := tokenFromServer[2]
+// 	if signFromClient != signFromServer {
+// 		return errors.New("invalid token")
+// 	}
+// 	return nil
+// }
+
+func CheckTokenFromClient(tokenFromUser string, secret string) error {
+	token := strings.Split(tokenFromUser[7:], ".")
+	signFromClient := token[2]
+	unsigned := token[0] + "." + token[1]
+	hash := hmac.New(sha256.New, []byte(secret))
+	hash.Write([]byte(unsigned))
+	signFromServer := EncodeBase64(hash.Sum(nil))
+	// signed := unsigned + "." + string(sign)
+	fmt.Println(unsigned)
+	fmt.Println(signFromClient)
+	fmt.Println(string(signFromServer))
+	if signFromClient != string(signFromServer) {
 		return errors.New("invalid token")
 	}
 	return nil

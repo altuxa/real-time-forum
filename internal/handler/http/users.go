@@ -66,3 +66,7 @@ func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
 // func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 // 	strId := strings.TrimPrefix(r.URL.Path,"/")
 // }
+
+func (h *Handler) Test(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello"))
+}
