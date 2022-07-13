@@ -7,7 +7,7 @@ import (
 
 type Users interface {
 	SignUp(model.User) error
-	SignIn(model.User) error
+	SignIn(model.User) (string, error)
 }
 
 type Posts interface {

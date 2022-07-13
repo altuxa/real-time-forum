@@ -52,7 +52,7 @@ func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("invalid input %s", err), http.StatusBadRequest)
 		return
 	}
-	err = h.usersService.SignIn(model.User{
+	token, err := h.usersService.SignIn(model.User{
 		NickName: input.NickName,
 		Password: input.Password,
 	})
@@ -60,6 +60,7 @@ func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf("user not found %s", err), http.StatusBadRequest)
 		return
 	}
+	w.Header().Set("Authorization", "Bearer "+token)
 	w.WriteHeader(http.StatusOK)
 }
 
